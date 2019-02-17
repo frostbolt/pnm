@@ -7,6 +7,7 @@
 #endif
 
 #include <iostream>
+#include <omp.h>
 #include "functions.h"
 
 /**
@@ -19,20 +20,22 @@ double trapeziumS(double x1, double x2) {
 /**
  * Error estimation function
  */
-double R(double a, double b, double steps) {
+double R(double a, double b, int steps) {
     return (b - a) / (24 * steps * steps) * f_2(max_abs(a, b, steps));
 }
 
 /**
  * Whole figure area
  */ 
-double S(double a, double b, double steps) {
+double S(double a, double b, int steps) {
     double step = (b - a) / steps;
     double result = 0;
 
-    while (a < b) {
-        result += trapeziumS(a, a + step);
-        a += step;
+    #pragma omp parallel for reduction(+:result)
+    for(int i = 0; i < steps; i ++) {
+        double x1 = a + step * i;
+        double x2 = x1 + step;
+        result += trapeziumS(x1, x2);
     }
 
     return result;
