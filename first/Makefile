@@ -19,16 +19,16 @@ endif
 
 default: all
 
-all: clean trapezium.o functions.o
+all: clean rectangles.o functions.o
 	mkdir build
-	$(COMPILER) $(FLAGS) trapezium.o functions.o -o build/trapezium
+	$(COMPILER) $(FLAGS) rectangles.o functions.o -o build/rectangles
 
-trapezium.o:
-	$(COMPILER) -c $(FLAGS) $(GRID_DIM) trapezium.cpp -o trapezium.o
+rectangles.o:
+	$(COMPILER) -c $(FLAGS) $(GRID_DIM) rectangles.cpp -o rectangles.o
 
 functions.o: 
 	$(COMPILER) -c $(FLAGS) functions.cpp -o functions.o
 
 clean:
-	$(RM) *.o trapezium all
+	$(RM) *.o rectangles all
 	$(RD) build
