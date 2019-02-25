@@ -1,3 +1,6 @@
+#ifndef __SOLUTION_H__
+#define __SOLUTION_H__
+
 class Solution
 {
 
@@ -14,3 +17,5 @@ public:
 private:
 	double s_area, s_duration;
 };
+
+#endif // __SOLUTION_H__

@@ -10,11 +10,11 @@ ifeq ($(OS),Darwin)
 endif
 
 ifdef SYSTEMROOT
-RM = del /Q
-RD = rmdir /Q
+	RM = del /Q
+	RD = rmdir /Q
 else
-RM = rm -f
-RD = rm -rf 
+	RM = rm -f
+	RD = rm -rf
 endif
 
 default: all

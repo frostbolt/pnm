@@ -1,3 +1,6 @@
+#ifndef __RECTANGLES_H__
+#define __RECTANGLES_H__
+
 #include "Solution.h"
 
 namespace Trapezium
@@ -19,3 +22,5 @@ namespace LeftRectangle
 
     Solution solve(double a, double b, int steps);
 }
+
+#endif // __RECTANGLES_H__

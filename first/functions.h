@@ -5,4 +5,4 @@
 
 double max_abs(double a, double b, double steps);
 
-#endif
+#endif //__FUNCTIONS_H__
