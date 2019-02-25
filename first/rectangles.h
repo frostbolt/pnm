@@ -23,4 +23,18 @@ namespace LeftRectangle
     Solution solve(double a, double b, int steps);
 }
 
+namespace RightRectangle
+{
+    using namespace Rectangle;
+
+    Solution solve(double a, double b, int steps);
+}
+
+namespace MidRectangle
+{
+    using namespace Rectangle;
+
+    Solution solve(double a, double b, int steps);
+}
+
 #endif // __RECTANGLES_H__

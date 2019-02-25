@@ -1,10 +1,10 @@
-/*
- * Grid dimension can be specified with a specific compilers flag. Eg: -DGRID_DIM=10000
- */
+// /*
+//  * Grid dimension can be specified with a specific compilers flag. Eg: -DGRID_DIM=10000
+//  */
 
-#ifndef GRID_DIM
-#define GRID_DIM 100
-#endif
+// #ifndef GRID_DIM
+// #define GRID_DIM 100
+// #endif
 
 #include <omp.h>
 #include <chrono>
@@ -37,16 +37,16 @@ Solution Trapezium::solve(double a, double b, int steps) {
     double result = 0;
 
     #pragma omp parallel for reduction(+:result)
-    for (int i = 0; i < steps; i ++) {
+    for (int i = 0; i < steps; i++) {
         double x1 = a + step * i;
         double x2 = x1 + step;
-        result += trapeziumS(x1, x2);
+        result += S(x1, x2);
     }
 
     auto mulTime = std::chrono::steady_clock::now();
     auto runtimeDuration = std::chrono::duration_cast<std::chrono::duration<double>>(mulTime - startTime);
 
-    return Solution(result, runtimeDuration);
+    return Solution(result, runtimeDuration.count());
 }
 
 
@@ -73,7 +73,7 @@ Solution LeftRectangle::solve(double a, double b, int steps) {
     double result = 0;
 
     #pragma omp parallel for reduction(+:result)
-    for (int i = 0; i < steps; i ++) {
+    for (int i = 0; i < steps; i++) {
         double x1 = a + step * i;
         result += S(x1, step);
     }
@@ -81,5 +81,45 @@ Solution LeftRectangle::solve(double a, double b, int steps) {
     auto mulTime = std::chrono::steady_clock::now();
     auto runtimeDuration = std::chrono::duration_cast<std::chrono::duration<double>>(mulTime - startTime);
 
-    return Solution(result, runtimeDuration);
+    return Solution(result, runtimeDuration.count());
+}
+
+/**
+ * Whole figure area using Right Rectangle method
+ */
+Solution RightRectangle::solve(double a, double b, int steps) {
+    auto startTime = std::chrono::steady_clock::now();
+    double step = (b - a) / steps;
+    double result = 0;
+
+    #pragma omp parallel for reduction(+:result)
+    for (int i = 0; i < steps; i++) {
+        double x2 = a + step * (i + 1);
+        result += S(x2, step);
+    }
+
+    auto mulTime = std::chrono::steady_clock::now();
+    auto runtimeDuration = std::chrono::duration_cast<std::chrono::duration<double>>(mulTime - startTime);
+
+    return Solution(result, runtimeDuration.count());
+}
+
+/**
+ * Whole figure area using Middle Rectangle method
+ */
+Solution MidRectangle::solve(double a, double b, int steps) {
+    auto startTime = std::chrono::steady_clock::now();
+    double step = (b - a) / steps;
+    double result = 0;
+
+    #pragma omp parallel for reduction(+:result)
+    for (int i = 0; i < steps; i++) {
+        double x1 = a + step * i + step / 2;
+        result += S(x1, step);
+    }
+
+    auto mulTime = std::chrono::steady_clock::now();
+    auto runtimeDuration = std::chrono::duration_cast<std::chrono::duration<double>>(mulTime - startTime);
+
+    return Solution(result, runtimeDuration.count());
 }
