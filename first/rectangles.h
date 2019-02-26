@@ -6,35 +6,35 @@
 namespace Trapezium
 {
     double S(double x1, double x2);
-    double R(double a, double b, int steps);
-    Solution solve(double a, double b, int steps);
+    double R(double a, double b, size_t steps);
+    Solution solve(double a, double b, size_t steps);
 }
 
 namespace Rectangle
 {
-    double S(double point, double step);
-    double R(double a, double b, int steps);
+    double S(double posize_t, double step);
+    double R(double a, double b, size_t steps);
 }
 
 namespace LeftRectangle
 {
     using namespace Rectangle;
 
-    Solution solve(double a, double b, int steps);
+    Solution solve(double a, double b, size_t steps);
 }
 
 namespace RightRectangle
 {
     using namespace Rectangle;
 
-    Solution solve(double a, double b, int steps);
+    Solution solve(double a, double b, size_t steps);
 }
 
 namespace MidRectangle
 {
     using namespace Rectangle;
 
-    Solution solve(double a, double b, int steps);
+    Solution solve(double a, double b, size_t steps);
 }
 
 #endif // __RECTANGLES_H__

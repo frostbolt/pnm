@@ -1,5 +1,3 @@
-GRID_DIM = -DGRID_DIM=10000
-
 COMPILER = g++
 
 FLAGS = -std=c++0x -O2 -Wall -Wextra -Wpedantic -fopenmp
@@ -19,12 +17,15 @@ endif
 
 default: all
 
-all: clean rectangles.o functions.o
+all: clean main.o rectangles.o functions.o
 	mkdir build
-	$(COMPILER) $(FLAGS) rectangles.o functions.o -o build/rectangles
+	$(COMPILER) $(FLAGS) main.o rectangles.o functions.o -o build/main
+
+main.o:
+	$(COMPILER) -c $(FLAGS) main.cpp -o main.o
 
 rectangles.o:
-	$(COMPILER) -c $(FLAGS) $(GRID_DIM) rectangles.cpp -o rectangles.o
+	$(COMPILER) -c $(FLAGS) rectangles.cpp -o rectangles.o
 
 functions.o: 
 	$(COMPILER) -c $(FLAGS) functions.cpp -o functions.o
