@@ -7,18 +7,46 @@
 #include "rectangles.h"
 
 /**
- * Trapezium Area
+ * Rectangle Area
+ */
+double Rectangle::S(double point, double step) { 
+    // TODO: Get rid of this.
+    return f(point) * step;
+}
+
+/**
+ * Rectangle Error estimation function
+ */
+double Rectangle::R(double a, double b, size_t steps) {
+    return (b - a) / (24 * steps * steps) * f_2(max_abs(a, b, steps));
+}
+
+/**
+ * Areas
  */
 double Trapezium::S(double x1, double x2) {
     return ((f(x2) + f(x1)) / 2) * (x2 - x1);
 }
 
 /**
- * Error estimation function
+ * Error estimation functions
  */
 double Trapezium::R(double a, double b, size_t steps) {
     return (b - a) / (24 * steps * steps) * f_2(max_abs(a, b, steps));
 }
+
+double MidRectangle::R(double a, double b, size_t steps) {
+    return std::pow(b - a, 3) / (24 * steps * steps) * f_2(max_abs(a, b, steps));
+}
+
+double Simpson::R(double a, double b, size_t steps) {
+    return std::pow(b - a, 5) / (2880 * std::pow(steps, 4)) * f_2(max_abs(a, b, steps));
+}
+
+double ThreeEights::R(double a, double b, size_t steps) {
+    return std::pow(b - a, 5) / (80 * std::pow(steps, 4)) * f_2(max_abs(a, b, steps));
+}
+
 
 /**
  * Whole figure area using Trapezium method
@@ -39,22 +67,6 @@ Solution Trapezium::solve(double a, double b, size_t steps) {
     auto runtimeDuration = std::chrono::duration_cast<std::chrono::duration<double>>(mulTime - startTime);
 
     return Solution(omp_get_max_threads(), result, R(a, b, steps), runtimeDuration.count());
-}
-
-
-/**
- * Rectangle Area
- */
-double Rectangle::S(double point, double step) { 
-    // TODO: Get rid of this.
-    return f(point) * step;
-}
-
-/**
- * Error estimation function
- */
-double Rectangle::R(double a, double b, size_t steps) {
-    return (b - a) / (24 * steps * steps) * f_2(max_abs(a, b, steps));
 }
 
 /**
