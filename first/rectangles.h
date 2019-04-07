@@ -9,6 +9,27 @@ namespace Rectangle
     double R(double a, double b, size_t steps);
 }
 
+
+namespace LeftRectangle
+{
+    using namespace Rectangle;
+    Solution solve(double a, double b, size_t steps);
+}
+
+namespace RightRectangle
+{
+    using namespace Rectangle;
+    Solution solve(double a, double b, size_t steps);
+}
+
+namespace MidRectangle
+{
+    using Rectangle::S;
+
+    double R(double a, double b, size_t steps);
+    Solution solve(double a, double b, size_t steps);
+}
+
 namespace Trapezium
 {
     double S(double x1, double x2);
@@ -16,38 +37,15 @@ namespace Trapezium
     Solution solve(double a, double b, size_t steps);
 }
 
-namespace LeftRectangle
-{
-    using namespace Rectangle;
-
-    Solution solve(double a, double b, size_t steps);
-}
-
-namespace RightRectangle
-{
-    using namespace Rectangle;
-
-    Solution solve(double a, double b, size_t steps);
-}
-
-namespace MidRectangle
-{
-    using namespace Rectangle;
-
-    Solution solve(double a, double b, size_t steps);
-}
-
 namespace Simpson
 {
-    using namespace Rectangle;
-
+    double R(double a, double b, size_t steps);
     Solution solve(double a, double b, size_t steps);
 }
 
 namespace ThreeEights
 {
-    using namespace Rectangle;
-
+    double R(double a, double b, size_t steps);
     Solution solve(double a, double b, size_t steps);
 }
 

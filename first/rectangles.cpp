@@ -18,7 +18,7 @@ double Rectangle::S(double point, double step) {
  * Rectangle Error estimation function
  */
 double Rectangle::R(double a, double b, size_t steps) {
-    return (b - a) / (24 * steps * steps) * f_2(max_abs(a, b, steps));
+    return std::pow(b - a, 2) / (2 * steps) * f_2(max_abs(a, b, steps));
 }
 
 /**
@@ -66,7 +66,7 @@ Solution Trapezium::solve(double a, double b, size_t steps) {
     auto mulTime = std::chrono::steady_clock::now();
     auto runtimeDuration = std::chrono::duration_cast<std::chrono::duration<double>>(mulTime - startTime);
 
-    return Solution(omp_get_max_threads(), result, R(a, b, steps), runtimeDuration.count());
+    return Solution(omp_get_max_threads(), result, steps, R(a, b, steps), runtimeDuration.count());
 }
 
 /**
@@ -86,7 +86,7 @@ Solution LeftRectangle::solve(double a, double b, size_t steps) {
     auto mulTime = std::chrono::steady_clock::now();
     auto runtimeDuration = std::chrono::duration_cast<std::chrono::duration<double>>(mulTime - startTime);
 
-    return Solution(omp_get_max_threads(), result, R(a, b, steps), runtimeDuration.count());
+    return Solution(omp_get_max_threads(), result, steps, R(a, b, steps), runtimeDuration.count());
 }
 
 /**
@@ -106,7 +106,7 @@ Solution RightRectangle::solve(double a, double b, size_t steps) {
     auto mulTime = std::chrono::steady_clock::now();
     auto runtimeDuration = std::chrono::duration_cast<std::chrono::duration<double>>(mulTime - startTime);
 
-    return Solution(omp_get_max_threads(), result, R(a, b, steps), runtimeDuration.count());
+    return Solution(omp_get_max_threads(), result, steps, R(a, b, steps), runtimeDuration.count());
 }
 
 /**
@@ -126,5 +126,55 @@ Solution MidRectangle::solve(double a, double b, size_t steps) {
     auto mulTime = std::chrono::steady_clock::now();
     auto runtimeDuration = std::chrono::duration_cast<std::chrono::duration<double>>(mulTime - startTime);
 
-    return Solution(omp_get_max_threads(), result, R(a, b, steps), runtimeDuration.count());
+    return Solution(omp_get_max_threads(), result, steps, R(a, b, steps), runtimeDuration.count());
+}
+
+/**
+ * Whole figure area using Simpson method
+ */
+Solution Simpson::solve(double a, double b, size_t steps) {
+    auto startTime = std::chrono::steady_clock::now();
+    double step = (b - a) / steps;
+    double result = 0;
+
+    #pragma omp parallel for reduction(+:result)
+    for (size_t i = 0; i < steps; i+= 2) {
+        double x0 = a + step * i;
+        double x1 = a + step * (i + 1);
+        double x2 = a + step * (i + 2);
+        result += f(x0) + 4 * f(x1) + f(x2);
+    }
+
+    result = step / 3 * result;
+
+    auto mulTime = std::chrono::steady_clock::now();
+    auto runtimeDuration = std::chrono::duration_cast<std::chrono::duration<double>>(mulTime - startTime);
+
+    return Solution(omp_get_max_threads(), result, steps, R(a, b, steps), runtimeDuration.count());
+}
+
+
+/**
+ * Whole figure area using Simpson method
+ */
+Solution ThreeEights::solve(double a, double b, size_t steps) {
+    auto startTime = std::chrono::steady_clock::now();
+    double step = (b - a) / steps;
+    double result = 0;
+
+    #pragma omp parallel for reduction(+:result)
+    for (size_t i = 0; i < steps; i+= 3) {
+        double x0 = a + step * i;
+        double x1 = a + step * (i + 1);
+        double x2 = a + step * (i + 2);
+        double x3 = a + step * (i + 3);
+        result += f(x0) + 3 * (f(x1) + f(x2)) + f(x3);
+    }
+
+    result = 3. / 8 * step * result;
+
+    auto mulTime = std::chrono::steady_clock::now();
+    auto runtimeDuration = std::chrono::duration_cast<std::chrono::duration<double>>(mulTime - startTime);
+
+    return Solution(omp_get_max_threads(), result, steps, R(a, b, steps), runtimeDuration.count());
 }

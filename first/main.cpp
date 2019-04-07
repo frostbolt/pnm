@@ -18,10 +18,13 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    std::cout << Trapezium::solve(A, B, N).toString();
-    std::cout << LeftRectangle::solve(A, B, N).toString();
-    std::cout << RightRectangle::solve(A, B, N).toString();
-    std::cout << MidRectangle::solve(A, B, N).toString();
+
+    std::cout << "Trapezium:"<< std::endl << Trapezium::solve(A, B, N).toStringPretty() << std::endl;
+    std::cout << "LeftRectangle:"<< std::endl << LeftRectangle::solve(A, B, N).toStringPretty() << std::endl;
+    std::cout << "RightRectangle:"<< std::endl << RightRectangle::solve(A, B, N).toStringPretty() << std::endl;
+    std::cout << "MidRectangle:"<< std::endl << MidRectangle::solve(A, B, N).toStringPretty() << std::endl;
+    std::cout << "Simpson:"<< std::endl << Simpson::solve(A, B, N).toStringPretty() << std::endl;
+    std::cout << "ThreeEights:"<< std::endl << ThreeEights::solve(A, B, N).toStringPretty() << std::endl;
 
     return 0;
 }
