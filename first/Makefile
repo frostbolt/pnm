@@ -1,4 +1,5 @@
 COMPILER = g++
+RUNNER = ./build/main -n 100000
 
 FLAGS = -std=c++0x -O2 -Wall -Wextra -Wpedantic -fopenmp
 
@@ -33,3 +34,6 @@ functions.o:
 clean:
 	$(RM) *.o rectangles all
 	$(RD) build
+
+run:
+	$(RUNNER)

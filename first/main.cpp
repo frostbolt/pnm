@@ -18,13 +18,12 @@ int main(int argc, char *argv[]) {
         }
     }
 
-
-    std::cout << "Trapezium:"<< std::endl << Trapezium::solve(A, B, N).toStringPretty() << std::endl;
-    std::cout << "LeftRectangle:"<< std::endl << LeftRectangle::solve(A, B, N).toStringPretty() << std::endl;
-    std::cout << "RightRectangle:"<< std::endl << RightRectangle::solve(A, B, N).toStringPretty() << std::endl;
-    std::cout << "MidRectangle:"<< std::endl << MidRectangle::solve(A, B, N).toStringPretty() << std::endl;
-    std::cout << "Simpson:"<< std::endl << Simpson::solve(A, B, N).toStringPretty() << std::endl;
-    std::cout << "ThreeEights:"<< std::endl << ThreeEights::solve(A, B, N).toStringPretty() << std::endl;
+    std::cout << "{\"Trapezium\":[" << Trapezium::solve(A, B, N).toString()<< "]," << std::endl;
+    std::cout << "\"LeftRectangle\":[" << LeftRectangle::solve(A, B, N).toString()<< "]," << std::endl;
+    std::cout << "\"RightRectangle\":[" << RightRectangle::solve(A, B, N).toString()<< "]," << std::endl;
+    std::cout << "\"MidRectangle\":[" << MidRectangle::solve(A, B, N).toString()<< "]," << std::endl;
+    std::cout << "\"Simpson\":[" << Simpson::solve(A, B, N).toString() << "]," << std::endl;
+    std::cout << "\"ThreeEights\":[" << ThreeEights::solve(A, B, N).toString()<< "]}" << std::endl;
 
     return 0;
 }

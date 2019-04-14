@@ -1,5 +1,5 @@
 COMPILER = mpicxx
-RUNNER = mpirun
+RUNNER = mpirun -np 2 build/main
 
 FLAGS = -std=c++0x -O2 -Wall -Wextra -Wpedantic -fopenmp
 
@@ -21,14 +21,14 @@ main.o:
 	$(COMPILER) -c $(FLAGS) main.cpp -o main.o
 
 rectangles.o:
-	$(COMPILER) -c $(FLAGS) rectangles.cpp -o rectangles.o
+	$(COMPILER) -c $(FLAGS) ../first/rectangles.cpp -o rectangles.o
 
 functions.o: 
-	$(COMPILER) -c $(FLAGS) functions.cpp -o functions.o
+	$(COMPILER) -c $(FLAGS) ../first/functions.cpp -o functions.o
 
 clean:
 	$(RM) *.o rectangles all
 	$(RD) build
 
 run:
-	$(RUNNER) -np 2 build/main 
+	$(RUNNER)

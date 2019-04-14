@@ -19,6 +19,8 @@ struct Solution {
 	{}
 
 	inline double area() const { return s_area; }
+	inline double error() const { return s_error; }
+	inline double steps() const { return s_steps; }
 
 	inline double duration() const { return s_duration; }
 
@@ -29,7 +31,7 @@ struct Solution {
 		ss.setf(std::cout.fixed);
 		std::cout.setf(std::cout.fixed);
 
-		ss << s_numThreads << "," << s_area << "," << s_steps << "," << s_error << "," << s_duration << std::endl;
+		ss << s_numThreads << "," << s_area << "," << s_steps << "," << s_error << "," << s_duration;
 		return ss.str();
 	}
 

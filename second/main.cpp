@@ -4,9 +4,9 @@
 #include <chrono>
 #include <mpi.h>
 
-#include "Solution.h"
-#include "condition.h"
-#include "rectangles.h"
+#include "../first/Solution.h"
+#include "../first/condition.h"
+#include "../first/rectangles.h"
 
 typedef Solution(*function)(double, double, size_t);
 
