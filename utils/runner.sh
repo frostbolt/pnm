@@ -6,7 +6,7 @@
 #
 #SBATCH --cpus-per-task=20
 #
-#SBATCH --time=30:00
+#SBATCH --time=4:00:00
 #SBATCH --mem-per-cpu=100
 
 ################################################################
@@ -27,7 +27,7 @@ echo -ne "[" > $filename
 for ((omp_threads=1; omp_threads<=$repeats; omp_threads++))
 do
 
-	for (( dim = 50000; dim <= $maxdim; dim*=5))
+	for (( dim = 250000; dim <= $maxdim; dim*=5))
 	do
 		echo "counting for $dim"
 
