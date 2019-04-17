@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
     std::cout << "\"MidRectangle\": { \"result:\" " << D2::MidRectangle::solve(A1, B1, C1, D1, N)  << ", \"err\": " << D2::MidRectangle::R(A1, B1, C1, D1, N) << "}," << std::endl;
     std::cout << "\"Simpson\": { \"result:\" " << D2::Simpson::solve(A1, B1, C1, D1, N) << ", \"err\": " << D2::Simpson::R(A1, B1, C1, D1, N) << "}," << std::endl;
     std::cout << "\"ThreeEights\": { \"result:\" " << D2::ThreeEights::solve(A1, B1, C1, D1, N)  << ", \"err\": " << D2::ThreeEights::R(A1, B1, C1, D1, N) << "}}" << std::endl;
+    std::cout << "\"MonteCarlo\": { \"result:\" " << D2::MonteCarlo::solve(A1, B1, C1, D1, N)  << ", \"err\": " << D2::MonteCarlo::R(A1, B1, C1, D1, N) << "}}" << std::endl;
 
     return 0;
 }

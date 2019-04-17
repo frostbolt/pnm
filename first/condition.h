@@ -22,20 +22,20 @@ inline double f_2(double x) {
 }
 
 double const A1 = 0;
-double const B1 = 1;
-double const C1 = 2;
-double const D1 = 5;
+double const B1 = 2;
+double const C1 = 0;
+double const D1 = 2;
 
 inline double fn(long double x, long double y) {
-	return x/(y*y);
+	return x*y+y*y;
 }
 
 inline double fn_x(long double x, long double y) {
-	return 1/(y*y);
+	return y;
 }
 
 inline double fn_y(long double x, long double y) {
-	return 2*x/(pow(y, 3));
+	return 1 - 2*y;
 }
 
 inline double fn_xx(long double x, long double y) {
@@ -43,11 +43,11 @@ inline double fn_xx(long double x, long double y) {
 }
 
 inline double fn_yy(long double x, long double y) {
-	return 6*x/(pow(y, 4));
+	return -2;
 }
 
 inline double fn_xy(long double x, long double y){
-	return 2/(pow(y, 3));
+	return 1;
 }
 
 #endif //__CONDITION_H__
